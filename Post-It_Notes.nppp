@@ -1,0 +1,21 @@
+
+MySQL User & Privileges:
+    Login:
+        Login Name:                 PyCsvMy     [NOTE: python-csv-to-mysql exceeds the length limit.]
+        Authentication type:        Standard
+        Limit to matching hosts:    127.0.0.1   [NOTE: User should not be allowed remote access.]
+    Account Limits
+        Max. Queries:		        3600	[NOTE: On average, 1 query per 1 second.]
+        Max. Updates:		        3600	[NOTE: On average, 1 update per 1 second.]
+        Max. Connections:	        4	[NOTE: On average, 1 connections per 15 minutes.]
+        Concurrent Connections:     12	[NOTE: Expected to be 4 clients from 3 computers.]
+            [NOTE: These are very limited, and are expected to only apply to a local development environment.]
+    Schema Privileges:
+        EXECUTE?
+        SELECT?
+        CREATE?
+
+Q&A: Shall we require that the initial configuration require creating a schema?
+
+Automation of the Database Schema requires the MySQL user account to have CREATE and DROP privileges.
+Otherwise, the Database Schema needs to be specified.
