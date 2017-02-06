@@ -1,0 +1,56 @@
+
+# mysql_cursor.execute(SQL_CREATE_DATABASE)
+# # pymysql.err.OperationalError: (1044, "Access denied for user 'PyCsvMysql'@'127.0.0.1' to database 'ipeds_2014_provisional_final'")
+
+Adding CREATE Privileges for the MySQL user cleared this error.
+
+
+# mysql_cursor.execute(SQL_CREATE_DATABASE)
+# # pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%s' at line 1")
+
+Adding the variable of the schema name for the parameter cleared these errors.
+
+
+# File "C:/Users/jbalcomb/IdeaProjects/PyMyCsv2Db/PyMyCsv2Db_Main.py", line 200, in main
+#   mysql_cursor.execute(SQL_CREATE_DATABASE, directory_for_schema_name)
+# # pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''IPEDS_2015_Final'' at line 1")
+
+Moving the SQL query string below the assignment for 'directory_for_schema_name' and including the parameter in the string cleared this error.
+Q&A(JamesBalcomb): Can the SQL query string for "CREATE DATABASE" no be parameterized?
+
+
+mysql_connection = pymysql.connect(host=mysql_host, port=mysql_port, user=mysql_user, passwd=mysql_passwd)
+# # pymysql.err.InternalError: (1226, "User 'PyCsvMysql' has exceeded the 'max_connections_per_hour' resource (current value: 4)")
+
+Increasing the "Max. Connections" on the "Account Limits" for the MySQL user cleared this error.
+
+
+# File "C:/Users/jbalcomb/IdeaProjects/PyMyCsv2Db/PyMyCsv2Db_Main.py", line 199, in main
+#   result_check_for_database = mysql_cursor.execute(SQL_CHECK_FOR_DATABASE)
+# # pymysql.err.InternalError: (1054, "Unknown column 'IPEDS_2015_Final' in 'where clause'")
+
+Removing the parameter from the SQL query string and adding it back to the mysql_cursor.execute() call cleared this error.
+Q&A(JamesBalcomb): What is the difference between this SELECT query and the CREATE DATABASE query, with regard to the parameterization?
+
+
+# File "C:/Users/jbalcomb/IdeaProjects/PyMyCsv2Db/PyMyCsv2Db_Main.py", line 234, in main
+#   result_check_for_database = mysql_cursor.execute(SQL_CHECK_FOR_DATABASE)
+# # pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%s' at line 1")
+# File "C:/Users/jbalcomb/IdeaProjects/PyMyCsv2Db/PyMyCsv2Db_Main.py", line 258, in main
+#   result_check_for_database = mysql_cursor.execute(SQL_CHECK_FOR_DATABASE)
+# # pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%s' at line 1")
+
+? I lost track of something here. In any case, the following notes hold true, for multiple (all) cases.
+From this:
+    "result_check_for_database = mysql_cursor.execute(SQL_CHECK_FOR_DATABASE)"
+To this:
+    "result_check_for_database = mysql_cursor.execute(SQL_CHECK_FOR_DATABASE, (directory_for_schema_name,))"
+
+
+# File "C:/Users/jbalcomb/IdeaProjects/PyMyCsv2Db/PyMyCsv2Db_Main.py", line 245, in main
+#   result_drop_database = mysql_cursor.execute(SQL_DROP_DATABASE)
+# # pymysql.err.OperationalError: (1044, "Access denied for user 'PyCsvMysql'@'127.0.0.1' to database 'ipeds_2015_final'")
+
+Adding DROP Privileges for the MySQL user cleared this error.
+
+

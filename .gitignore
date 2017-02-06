@@ -1,15 +1,20 @@
 
+#.git/
+
 #.idea/misc.xml
 #.idea/modules.xml
 #.idea/python-csv-to-mysql.iml
 #.idea/vcs.xml
 .idea/workspace.xml
 
-#.git/
+#CSV/
 
 #.gitignore
 
 #_config.yml
 #Post-It_Notes.nppp
+python-csv-to-mysql.config
+#python-csv-to-mysql.config-TEMPLATE
 #python-csv-to-mysql.py
 #README.md
+#test-use-cases.txt
